@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sltb.sltbmanagement.controller.AttendanceViewController">
+   <children>
+      <Label layoutX="45.0" layoutY="36.0" prefHeight="30.0" prefWidth="72.0" text="Attend Id" />
+      <Label layoutX="45.0" layoutY="73.0" prefHeight="30.0" prefWidth="72.0" text="Status" />
+      <Label layoutX="45.0" layoutY="117.0" prefHeight="30.0" prefWidth="72.0" text="Date" />
+      <Label layoutX="45.0" layoutY="166.0" prefHeight="30.0" prefWidth="72.0" text="Emp Id" />
+      <TextField fx:id="txtattendId" layoutX="152.0" layoutY="38.0" />
+      <TextField fx:id="txtStatus" layoutX="152.0" layoutY="75.0" />
+      <TextField fx:id="txtDate" layoutX="152.0" layoutY="119.0" />
+      <TextField fx:id="txtEmpId" layoutX="152.0" layoutY="168.0" />
+      <TableView fx:id="tblAttendence" layoutX="45.0" layoutY="227.0" prefHeight="193.0" prefWidth="489.0">
+        <columns>
+          <TableColumn prefWidth="114.0" text="Attend id" />
+          <TableColumn prefWidth="95.0" text="Status" />
+            <TableColumn prefWidth="127.0" text="Date" />
+            <TableColumn prefWidth="152.0" text="Employee Id" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAdd" layoutX="440.0" layoutY="38.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="72.0" text="ADD" />
+      <Button fx:id="btnUpdate" layoutX="440.0" layoutY="90.0" mnemonicParsing="false" onAction="#update" text="UPDATE" />
+      <Button fx:id="btnDelete" layoutX="440.0" layoutY="153.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="72.0" text="DELETE" />
+   </children>
+</AnchorPane>
