@@ -4,15 +4,18 @@ public class AttendanceDto {
     private String attendId;
     private String status;
     private String date;
+    private String time;
     private String empId;
+
 
 
     public AttendanceDto() {}
 
-    public AttendanceDto(String attendId, String status, String date, String empId) {
+    public AttendanceDto(String attendId, String status, String date, String time, String empId) {
         this.attendId = attendId;
         this.status = status;
         this.date = date;
+        this.time = time;
         this.empId = empId;
     }
 
@@ -40,6 +43,14 @@ public class AttendanceDto {
         this.date = date;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public String getEmpId() {
         return empId;
     }
@@ -48,12 +59,14 @@ public class AttendanceDto {
         this.empId = empId;
     }
 
+
     @Override
     public String toString() {
         return "AttendanceDto{" +
                 "attendId='" + attendId + '\'' +
                 ", status='" + status + '\'' +
                 ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
                 ", empId='" + empId + '\'' +
                 '}';
     }

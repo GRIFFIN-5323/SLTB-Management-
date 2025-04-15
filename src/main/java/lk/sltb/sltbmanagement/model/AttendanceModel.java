@@ -13,12 +13,13 @@ public class AttendanceModel {
 
     public String saveAttendance(AttendanceDto attendanceDto) throws SQLException, ClassNotFoundException {
         Connection connection= DBConnection.getInstance().getConnection();
-        String sql="INSERT INTO Attendance VALUES (?,?,?,?)";
+        String sql="INSERT INTO Attendance VALUES (?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,attendanceDto.getAttendId());
         preparedStatement.setString(2,attendanceDto.getStatus());
         preparedStatement.setString(3,attendanceDto.getDate());
-        preparedStatement.setString(4,attendanceDto.getEmpId());
+        preparedStatement.setString(4,attendanceDto.getTime());
+        preparedStatement.setString(5,attendanceDto.getEmpId());
 
         return preparedStatement.executeUpdate() >0 ? "SUCCESSFULLY SAVED" : "FAIL";
 
@@ -28,13 +29,14 @@ public class AttendanceModel {
 
     public String updateAttendance(AttendanceDto attendanceDto) throws SQLException, ClassNotFoundException {
         Connection connection= DBConnection.getInstance().getConnection();
-        String sql="UPDATE Attendance SET status=?, date=?, empId=? WHERE attend_id=?";
+        String sql="UPDATE Attendance SET status=?, date=?, attend_time=?, empId=? ,WHERE attend_id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         preparedStatement.setString(1,attendanceDto.getStatus());
         preparedStatement.setString(2,attendanceDto.getDate());
-        preparedStatement.setString(3,attendanceDto.getEmpId());
-        preparedStatement.setString(4,attendanceDto.getAttendId());
+        preparedStatement.setString(3,attendanceDto.getTime());
+        preparedStatement.setString(4,attendanceDto.getEmpId());
+        preparedStatement.setString(5,attendanceDto.getAttendId());
 
         return preparedStatement.executeUpdate() >0 ? "SUCCESSFULLY UPDATED" : "FAIL";
 
@@ -67,7 +69,7 @@ public class AttendanceModel {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()){
-            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"),resultSet.getString("status"),resultSet.getString("date"),resultSet.getString("empId"));
+            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"),resultSet.getString("status"),resultSet.getString("date"),resultSet.getString("attend_time"),resultSet.getString("empId"));
             return attendanceDto;
         }
 
@@ -91,7 +93,7 @@ public class AttendanceModel {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()){
-            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"),resultSet.getString("status"),resultSet.getString("date"),resultSet.getString("empId"));
+            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"),resultSet.getString("status"),resultSet.getString("date"),resultSet.getString("attend_time"),resultSet.getString("empId"));
             attendanceDtos.add(attendanceDto);
             return attendanceDtos;
         }

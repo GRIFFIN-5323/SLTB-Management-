@@ -4,27 +4,19 @@ public class EmpViolationDto {
     private String emp_violation_id;
     private String date;
     private String description;
-    private String fineAmount;
+    private double fineAmount;
     private String empId;
     private String violationId;
 
    public EmpViolationDto() {}
 
-    public EmpViolationDto(String emp_violation_id, String date, String description, String fineAmount, String empId, String violationId) {
+    public EmpViolationDto(String emp_violation_id, String date, String description, double fineAmount, String empId, String violationId) {
         this.emp_violation_id = emp_violation_id;
         this.date = date;
         this.description = description;
         this.fineAmount = fineAmount;
         this.empId = empId;
         this.violationId = violationId;
-    }
-
-    public String getEmp_violation_id() {
-        return emp_violation_id;
-    }
-
-    public void setEmp_violation_id(String emp_violation_id) {
-        this.emp_violation_id = emp_violation_id;
     }
 
     public String getDate() {
@@ -43,11 +35,19 @@ public class EmpViolationDto {
         this.description = description;
     }
 
-    public String getFineAmount() {
+    public String getEmp_violation_id() {
+        return emp_violation_id;
+    }
+
+    public void setEmp_violation_id(String emp_violation_id) {
+        this.emp_violation_id = emp_violation_id;
+    }
+
+    public double getFineAmount() {
         return fineAmount;
     }
 
-    public void setFineAmount(String fineAmount) {
+    public void setFineAmount(double fineAmount) {
         this.fineAmount = fineAmount;
     }
 
@@ -67,14 +67,13 @@ public class EmpViolationDto {
         this.violationId = violationId;
     }
 
-
     @Override
     public String toString() {
         return "EmpViolationDto{" +
                 "emp_violation_id='" + emp_violation_id + '\'' +
                 ", date='" + date + '\'' +
                 ", description='" + description + '\'' +
-                ", fineAmount='" + fineAmount + '\'' +
+                ", fineAmount=" + fineAmount +
                 ", empId='" + empId + '\'' +
                 ", violationId='" + violationId + '\'' +
                 '}';
