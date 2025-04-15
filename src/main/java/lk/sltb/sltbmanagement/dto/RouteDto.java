@@ -15,10 +15,10 @@ public class RouteDto {
 
     public RouteDto() {}
 
-    public RouteDto(double fuelConsumption, String routeNum, String routeId, int halts, String duration, double distance, String departureLocation, String arrivalLocation, String timetableId) {
-        this.fuelConsumption = fuelConsumption;
-        this.routeNum = routeNum;
+    public RouteDto(String routeId, String routeNum, double fuelConsumption, int halts, String duration, double distance, String departureLocation, String arrivalLocation, String timetableId) {
         this.routeId = routeId;
+        this.routeNum = routeNum;
+        this.fuelConsumption = fuelConsumption;
         this.halts = halts;
         this.duration = duration;
         this.distance = distance;

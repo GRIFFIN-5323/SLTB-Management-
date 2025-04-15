@@ -7,17 +7,19 @@ public class UserDto {
     private String role;
     private String email;
     private String contact;
+    private String password;
 
-    public UserDto() {}
+    public UserDto() {
+    }
 
-    public UserDto(String user_id, String name, String address, String role, String email, String contact) {
+    public UserDto(String user_id, String name, String address, String role, String email, String password, String contact) {
         this.user_id = user_id;
         this.name = name;
         this.address = address;
         this.role = role;
         this.email = email;
+        this.password = password;
         this.contact = contact;
-
     }
 
     public String getUser_id() {
@@ -52,6 +54,14 @@ public class UserDto {
         this.role = role;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -60,12 +70,12 @@ public class UserDto {
         this.email = email;
     }
 
-    public String getContact() {
-        return contact;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -77,6 +87,7 @@ public class UserDto {
                 ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", contact='" + contact + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

@@ -10,6 +10,14 @@ public class TimetableDto {
     public TimetableDto() {
     }
 
+    public TimetableDto(String timetableId, String departureLocation, String arrivalLocation, String arrivalTime, String departureTime) {
+        this.timetableId = timetableId;
+        this.departureLocation = departureLocation;
+        this.arrivalLocation = arrivalLocation;
+        this.arrivalTime = arrivalTime;
+        this.departureTime = departureTime;
+    }
+
     public String getTimetableId() {
         return timetableId;
     }
