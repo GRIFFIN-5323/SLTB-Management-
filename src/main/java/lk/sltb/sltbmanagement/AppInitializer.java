@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lk.sltb.sltbmanagement.DBConnection.DBConnection;
+import lk.sltb.sltbmanagement.controller.AttendanceViewController;
 
 import java.sql.SQLException;
 
@@ -19,6 +20,9 @@ public class AppInitializer  extends Application {
         Parent parent = FXMLLoader.load(getClass().getResource("/view/AttendanceView.fxml"));
         Scene scene = new Scene(parent);
         stage.setScene(scene);
+
+
+
         stage.show();
 
 

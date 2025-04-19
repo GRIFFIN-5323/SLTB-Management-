@@ -1,6 +1,7 @@
 package lk.sltb.sltbmanagement.model;
 
 import lk.sltb.sltbmanagement.DBConnection.DBConnection;
+import lk.sltb.sltbmanagement.dto.EmployeeDto;
 import lk.sltb.sltbmanagement.dto.LostItemDto;
 
 import java.sql.Connection;
@@ -11,8 +12,10 @@ import java.util.ArrayList;
 
 public class LostItemModel {
 
-  public String saveLostItem(LostItemDto lostItemDto) throws SQLException, ClassNotFoundException {
+  public String saveLostItem(LostItemDto lostItemDto, ArrayList<EmployeeDto> employeeDtos) throws SQLException, ClassNotFoundException {
       Connection connection= DBConnection.getInstance().getConnection();
+
+      try{
       String sql="INSERT INTO Lost_Item VALUES (?,?,?,?,?,?,?,?)";
       PreparedStatement preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setString(1, lostItemDto.getItemId());
@@ -25,7 +28,54 @@ public class LostItemModel {
       preparedStatement.setString(8,lostItemDto.getEmpId());
 
 
-      return preparedStatement.executeUpdate()>0 ? "Successful Added " : "Failed Add ";
+      boolean saveLostItem= preparedStatement.executeUpdate()>0 ;
+
+      if (saveLostItem) {
+          String pointSql = "UPDATE Employee SET emp_point=(emp_point+1) WHERE emp_id=? ";
+          boolean addPoint = true;
+
+          for (EmployeeDto employeeDto : employeeDtos) {
+              PreparedStatement pointStmt = connection.prepareStatement(pointSql);
+              pointStmt.setString(1, employeeDto.getEmp_id());
+
+
+              if (!(pointStmt.executeUpdate() > 0)) {
+                  addPoint = false;
+              }
+
+          }
+
+          if (addPoint) {
+              connection.commit();
+              return "Success";
+
+          } else {
+              connection.rollback();
+              return "Fail";
+
+
+
+          }
+
+      } else{
+          connection.rollback();
+          return "Fail to Add LostItem";
+      }
+
+  } catch (SQLException e) {
+        connection.rollback();
+
+
+        throw e;
+
+    } finally {
+        connection.setAutoCommit(true);
+
+
+    }
+
+
+}
 
 
 
@@ -33,10 +83,16 @@ public class LostItemModel {
 
 
 
-  }
 
 
-    public String updateLostItem(LostItemDto lostItemDto) throws SQLException, ClassNotFoundException {
+
+
+
+
+
+
+
+public String updateLostItem(LostItemDto lostItemDto) throws SQLException, ClassNotFoundException {
         Connection connection= DBConnection.getInstance().getConnection();
         String sql="UPDATE Lost_Item SET item_type=?,description=?,reported_by=?,location_found=?,time_found=?,date_found=? ,emp_id=? WHERE item_id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);

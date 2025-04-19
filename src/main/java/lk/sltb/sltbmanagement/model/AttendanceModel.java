@@ -7,18 +7,39 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AttendanceModel {
 
     public String saveAttendance(AttendanceDto attendanceDto) throws SQLException, ClassNotFoundException {
+
         Connection connection= DBConnection.getInstance().getConnection();
+
         String sql="INSERT INTO Attendance VALUES (?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+
+
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = today.format(formatter);
+        LocalTime time = LocalTime.now();
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String timeString = time.format(timeFormat);
+
+
+
+
+
+
+
         preparedStatement.setString(1,attendanceDto.getAttendId());
-        preparedStatement.setString(2,attendanceDto.getStatus());
-        preparedStatement.setString(3,attendanceDto.getDate());
-        preparedStatement.setString(4,attendanceDto.getTime());
+        preparedStatement.setString(2,"Present");
+        preparedStatement.setString(3,formattedDate);
+        preparedStatement.setString(4,timeString);
         preparedStatement.setString(5,attendanceDto.getEmpId());
 
         return preparedStatement.executeUpdate() >0 ? "SUCCESSFULLY SAVED" : "FAIL";
@@ -27,22 +48,7 @@ public class AttendanceModel {
 
     }
 
-    public String updateAttendance(AttendanceDto attendanceDto) throws SQLException, ClassNotFoundException {
-        Connection connection= DBConnection.getInstance().getConnection();
-        String sql="UPDATE Attendance SET status=?, date=?, attend_time=?, empId=? ,WHERE attend_id=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setString(1,attendanceDto.getStatus());
-        preparedStatement.setString(2,attendanceDto.getDate());
-        preparedStatement.setString(3,attendanceDto.getTime());
-        preparedStatement.setString(4,attendanceDto.getEmpId());
-        preparedStatement.setString(5,attendanceDto.getAttendId());
-
-        return preparedStatement.executeUpdate() >0 ? "SUCCESSFULLY UPDATED" : "FAIL";
-
-
-
-    }
 
 
     public String deleteAttendance(String attendId) throws SQLException, ClassNotFoundException {
