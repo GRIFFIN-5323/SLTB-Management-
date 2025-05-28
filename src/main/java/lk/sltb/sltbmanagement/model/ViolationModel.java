@@ -11,6 +11,29 @@ import java.util.ArrayList;
 
 public class ViolationModel {
 
+    public String getNextViolationId() throws SQLException, ClassNotFoundException {
+        Connection connection=DBConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT customer_id from customer ORDER BY customer_id DESC LIMIT 1");
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            String lastId=resultSet.getString(1);
+            String lastIdNumberString=lastId.substring(1) ;
+            int lastIdNumber=Integer.parseInt(lastIdNumberString);
+            int nextIdNumber=lastIdNumber+1;
+
+            String nextIdString=String.format("C%03d",nextIdNumber);
+            return nextIdString;
+        }
+
+        return "V001";
+
+
+
+
+
+    }
+
     public String saveViolation(ViolationDto violationDto) throws SQLException, ClassNotFoundException {
         Connection connection= DBConnection.getInstance().getConnection();
         String sql="INSERT INTO Violation VALUES(?,?,?)";

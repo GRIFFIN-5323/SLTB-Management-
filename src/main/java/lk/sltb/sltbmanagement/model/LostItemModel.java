@@ -12,10 +12,37 @@ import java.util.ArrayList;
 
 public class LostItemModel {
 
-  public String saveLostItem(LostItemDto lostItemDto, ArrayList<EmployeeDto> employeeDtos) throws SQLException, ClassNotFoundException {
+
+
+    public String getNextLostId() throws SQLException, ClassNotFoundException {
+        Connection connection=DBConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT item_id from Lost_Item ORDER BY item_id DESC LIMIT 1");
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            String lastId=resultSet.getString(1);
+            String lastIdNumberString=lastId.substring(1) ;
+            int lastIdNumber=Integer.parseInt(lastIdNumberString);
+            int nextIdNumber=lastIdNumber+1;
+
+            String nextIdString=String.format("L%03d",nextIdNumber);
+            return nextIdString;
+        }
+
+        return "L001";
+
+
+
+
+
+    }
+
+  public String saveLostItem(LostItemDto lostItemDto) throws SQLException, ClassNotFoundException {
       Connection connection= DBConnection.getInstance().getConnection();
 
+
       try{
+          connection.setAutoCommit(false);
       String sql="INSERT INTO Lost_Item VALUES (?,?,?,?,?,?,?,?)";
       PreparedStatement preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setString(1, lostItemDto.getItemId());
@@ -27,6 +54,8 @@ public class LostItemModel {
       preparedStatement.setString(7,lostItemDto.getDateFound());
       preparedStatement.setString(8,lostItemDto.getEmpId());
 
+      String empId=lostItemDto.getEmpId();
+
 
       boolean saveLostItem= preparedStatement.executeUpdate()>0 ;
 
@@ -34,16 +63,16 @@ public class LostItemModel {
           String pointSql = "UPDATE Employee SET emp_point=(emp_point+1) WHERE emp_id=? ";
           boolean addPoint = true;
 
-          for (EmployeeDto employeeDto : employeeDtos) {
+
               PreparedStatement pointStmt = connection.prepareStatement(pointSql);
-              pointStmt.setString(1, employeeDto.getEmp_id());
+              pointStmt.setString(1,empId);
 
-
+          System.out.println(pointSql);
               if (!(pointStmt.executeUpdate() > 0)) {
                   addPoint = false;
               }
 
-          }
+
 
           if (addPoint) {
               connection.commit();
@@ -59,7 +88,7 @@ public class LostItemModel {
 
       } else{
           connection.rollback();
-          return "Fail to Add LostItem";
+          return "Fail";
       }
 
   } catch (SQLException e) {

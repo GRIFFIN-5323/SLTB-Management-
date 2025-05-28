@@ -51,7 +51,7 @@ public class EmployeeModel {
 
     public EmployeeDto searchEmployee(String employeeId) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql="DELETE FROM Employee WHERE emp_id=?";
+        String sql="SELECT ALL * FROM Employee WHERE emp_id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         preparedStatement.setString(1,employeeId);
@@ -77,9 +77,9 @@ public class EmployeeModel {
 
     }
 
-    public ArrayList<EmployeeDto> getAllEmployee(String employeeId) throws SQLException, ClassNotFoundException {
+    public ArrayList<EmployeeDto> getAllEmployee() throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String sql="DELETE FROM Employee ";
+        String sql="SELECT ALL * FROM Employee ";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
       ArrayList<EmployeeDto> employeeDtos=new ArrayList<>();

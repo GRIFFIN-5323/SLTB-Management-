@@ -12,13 +12,14 @@ import java.util.ArrayList;
 public class TimetableModel {
     public String saveTimetable(TimetableDto timetableDto) throws SQLException, ClassNotFoundException {
         Connection connection= DBConnection.getInstance().getConnection();
-        String sql="INSERT INTO Timetable VALUES ( ?,?,?,?,?)";
+        String sql="INSERT INTO Timetable VALUES ( ?,?,?,?,?,?)";
         PreparedStatement preparedStatement=connection.prepareStatement(sql);
         preparedStatement.setString(1,timetableDto.getTimetableId());
         preparedStatement.setString(2,timetableDto.getDepartureLocation());
         preparedStatement.setString(3,timetableDto.getArrivalLocation());
         preparedStatement.setString(4,timetableDto.getArrivalTime());
         preparedStatement.setString(5,timetableDto.getDepartureTime());
+        preparedStatement.setString(6,timetableDto.getRouteId());
 
         return preparedStatement.executeUpdate() > 0 ? "Saved Successfully" : "Saved Failed";
 
@@ -27,14 +28,16 @@ public class TimetableModel {
 
     public String updateTimetable(TimetableDto timetableDto) throws SQLException, ClassNotFoundException {
         Connection connection= DBConnection.getInstance().getConnection();
-        String sql="UPDATE Timetable SET timetable_id=?, departure_location=?,arrival_location=?,arrival_time=?,departure_time=? WHERE timetable_id=?";
+        String sql="UPDATE Timetable SET timetable_id=?, departure_location=?,arrival_location=?,arrival_time=?,departure_time=?,route_id=? WHERE timetable_id=?";
         PreparedStatement preparedStatement=connection.prepareStatement(sql);
 
         preparedStatement.setString(1,timetableDto.getDepartureLocation());
         preparedStatement.setString(2,timetableDto.getArrivalLocation());
         preparedStatement.setString(3,timetableDto.getArrivalTime());
         preparedStatement.setString(4,timetableDto.getDepartureTime());
-        preparedStatement.setString(5,timetableDto.getTimetableId());
+        preparedStatement.setString(5,timetableDto.getRouteId());
+
+        preparedStatement.setString(6,timetableDto.getTimetableId());
 
         return preparedStatement.executeUpdate() > 0 ? "Updated Successfully" : "Updated Failed";
 
@@ -63,7 +66,7 @@ public class TimetableModel {
 
         if(resultSet.next()){
 
-            TimetableDto timetableDto=new TimetableDto(resultSet.getString("timetable_id"),resultSet.getString("departure_location"),resultSet.getString("arrival_location"),resultSet.getString("arrival_time"),resultSet.getString("departure_time"));
+            TimetableDto timetableDto=new TimetableDto(resultSet.getString("timetable_id"),resultSet.getString("departure_location"),resultSet.getString("arrival_location"),resultSet.getString("arrival_time"),resultSet.getString("departure_time"),resultSet.getString("route_id"));
             return timetableDto;
         }
 
@@ -84,7 +87,7 @@ ArrayList<TimetableDto> timetableDtos=new ArrayList<>();
 
         while(resultSet.next()){
 
-            TimetableDto timetableDto=new TimetableDto(resultSet.getString("timetable_id"),resultSet.getString("departure_location"),resultSet.getString("arrival_location"),resultSet.getString("arrival_time"),resultSet.getString("departure_time"));
+            TimetableDto timetableDto=new TimetableDto(resultSet.getString("timetable_id"),resultSet.getString("departure_location"),resultSet.getString("arrival_location"),resultSet.getString("arrival_time"),resultSet.getString("departure_time"),resultSet.getString("route_id"));
           timetableDtos.add(timetableDto);
         }
 

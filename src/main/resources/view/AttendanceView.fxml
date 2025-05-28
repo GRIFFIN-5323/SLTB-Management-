@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sltb.sltbmanagement.controller.AttendanceViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sltb.sltbmanagement.controller.AttendanceViewController">
    <children>
-      <Label layoutX="45.0" layoutY="36.0" prefHeight="30.0" prefWidth="72.0" text="Attend Id" />
-      <Label layoutX="45.0" layoutY="73.0" prefHeight="30.0" prefWidth="72.0" text="Status" />
-      <Label layoutX="45.0" layoutY="117.0" prefHeight="30.0" prefWidth="72.0" text="Date" />
-      <Label layoutX="45.0" layoutY="166.0" prefHeight="30.0" prefWidth="72.0" text="Emp Id" />
-      <TextField fx:id="txtattendId" layoutX="152.0" layoutY="38.0" />
-      <TextField fx:id="txtStatus" layoutX="152.0" layoutY="75.0" />
-      <TextField fx:id="txtDate" layoutX="152.0" layoutY="119.0" />
-      <TextField fx:id="txtEmpId" layoutX="152.0" layoutY="168.0" />
-      <TableView fx:id="tblAttendence" layoutX="56.0" layoutY="261.0" prefHeight="193.0" prefWidth="489.0">
+      <DatePicker fx:id="date" layoutX="570.0" layoutY="30.0" />
+      <Label layoutX="522.0" layoutY="33.0" text="Date">
+         <font>
+            <Font name="Inter Regular" size="15.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblAttendance" layoutX="34.0" layoutY="100.0" prefHeight="412.0" prefWidth="732.0">
         <columns>
-          <TableColumn prefWidth="114.0" text="Attend id" />
-          <TableColumn prefWidth="95.0" text="Status" />
-            <TableColumn prefWidth="127.0" text="Date" />
-            <TableColumn prefWidth="152.0" text="Employee Id" />
+          <TableColumn fx:id="colEmpId" prefWidth="137.0" text="Employee Id" />
+          <TableColumn fx:id="colName" prefWidth="112.0" text="Name" />
+            <TableColumn fx:id="colTime" prefWidth="150.0" text="Time In" />
+            <TableColumn fx:id="colStatus" prefWidth="152.0" text="Status" />
+            <TableColumn fx:id="colNote" prefWidth="180.0" text="Note" />
         </columns>
       </TableView>
-      <Button fx:id="btnAdd" layoutX="440.0" layoutY="38.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="72.0" text="ADD" />
-      <Button fx:id="btnUpdate" layoutX="440.0" layoutY="90.0" mnemonicParsing="false" onAction="#update" text="UPDATE" />
-      <Button fx:id="btnDelete" layoutX="440.0" layoutY="153.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="72.0" text="DELETE" />
-      <TextField fx:id="txtTime" layoutX="152.0" layoutY="214.0" />
-      <Label layoutX="45.0" layoutY="218.0" text="Time" />
-      <JFXCheckBox fx:id="checkAttend" layoutX="440.0" layoutY="227.0" onAction="#fillStatus" text="Attend" />
+      <JFXButton fx:id="btnSaveAttendance" layoutX="665.0" layoutY="536.0" onAction="#SaveOnAction" prefHeight="26.0" prefWidth="103.0" text="Save" />
    </children>
 </AnchorPane>

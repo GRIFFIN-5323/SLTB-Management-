@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.sltb.sltbmanagement.controller.LostItemViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sltb.sltbmanagement.controller.LostItemViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="-12.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="349.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="-1.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="321.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="436.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="467.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="356.0" />
+      <Ellipse fill="WHITE" layoutX="389.0" layoutY="74.0" radiusX="94.0" radiusY="52.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fitHeight="140.0" fitWidth="237.0" layoutX="271.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Downloads/the-word-lost-in-a-clean-modern-sans-ser_yvycr4qdT1e8Jf9FIiBQFg_zuoVr5LoSLuJU7MdCrxEDA-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <HBox layoutY="158.0" prefHeight="39.0" prefWidth="163.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="71.0" text="ID">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="177.0" layoutY="150.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <Label fx:id="lblId" prefHeight="18.0" prefWidth="612.0">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="207.0" prefHeight="39.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="57.0" text="Type">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="253.0" prefHeight="39.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="98.0" text="Description">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="5.0" layoutY="300.0" prefHeight="39.0" prefWidth="181.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="120.0" text="Reported By">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="24.0" layoutY="345.0" prefHeight="39.0" prefWidth="181.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="71.0" text="Location ">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="5.0" layoutY="489.0" prefHeight="39.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="76.0" text="Time">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="7.0" layoutY="393.0" prefHeight="39.0" prefWidth="150.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="71.0" text="Date">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="13.0" layoutY="440.0" prefHeight="39.0" prefWidth="137.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="19.0" prefWidth="109.0" text="Employee Id">
+               <font>
+                  <Font name="Inter Regular" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <JFXButton layoutX="147.0" layoutY="552.0" onAction="#SaveOnAction" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #2980b9;" text="SAVE">
+         <font>
+            <Font name="Inter Regular" size="15.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="177.0" layoutY="197.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtType" prefHeight="26.0" prefWidth="1151.0" promptText="Type" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+      <HBox fx:id="asdfd" layoutX="171.0" layoutY="246.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtDes" prefHeight="26.0" prefWidth="1151.0" promptText="Description" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+      <HBox layoutX="171.0" layoutY="292.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtReport" prefHeight="26.0" prefWidth="1151.0" promptText="Reported By" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+      <HBox layoutX="171.0" layoutY="339.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtLocation" prefHeight="26.0" prefWidth="1151.0" promptText="Location" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+      <HBox layoutX="171.0" layoutY="384.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtDate" prefHeight="26.0" prefWidth="1151.0" promptText="Date" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+      <HBox layoutX="171.0" layoutY="432.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtEmployeeId" prefHeight="26.0" prefWidth="1151.0" promptText="Employee Id" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+      <HBox layoutX="171.0" layoutY="470.0" prefHeight="39.0" prefWidth="612.0">
+         <children>
+            <TextField fx:id="txtTime" prefHeight="26.0" prefWidth="1151.0" promptText="Time" style="-fx-background-color: #ecf0f1; -fx-border-color: rgb(58, 89, 209); -fx-border-width: 0 0 1px 0;" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

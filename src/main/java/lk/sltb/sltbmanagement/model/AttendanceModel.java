@@ -14,13 +14,13 @@ import java.time.format.DateTimeFormatter;
 
 public class AttendanceModel {
 
-    public String saveAttendance(AttendanceDto attendanceDto) throws SQLException, ClassNotFoundException {
 
-        Connection connection= DBConnection.getInstance().getConnection();
+    public boolean saveAttendance(AttendanceDto attendanceDto) throws SQLException, ClassNotFoundException {
 
-        String sql="INSERT INTO Attendance VALUES (?,?,?,?,?)";
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        String sql = "INSERT INTO Attendance VALUES (?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
 
 
         LocalDate today = LocalDate.now();
@@ -31,75 +31,64 @@ public class AttendanceModel {
         String timeString = time.format(timeFormat);
 
 
+        String nextId = getNextCustomerId();
 
 
+        preparedStatement.setString(1, nextId);
+        preparedStatement.setString(2, "Present");
+        preparedStatement.setString(3, formattedDate);
+        preparedStatement.setString(4, timeString);
+        preparedStatement.setString(5, attendanceDto.getEmpId());
 
-
-
-        preparedStatement.setString(1,attendanceDto.getAttendId());
-        preparedStatement.setString(2,"Present");
-        preparedStatement.setString(3,formattedDate);
-        preparedStatement.setString(4,timeString);
-        preparedStatement.setString(5,attendanceDto.getEmpId());
-
-        return preparedStatement.executeUpdate() >0 ? "SUCCESSFULLY SAVED" : "FAIL";
-
+        return preparedStatement.executeUpdate() > 0 ;
 
 
     }
 
 
-
-
     public String deleteAttendance(String attendId) throws SQLException, ClassNotFoundException {
-        Connection connection= DBConnection.getInstance().getConnection();
-        String sql="DELETE FROM Attendance WHERE attend_id=?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "DELETE FROM Attendance WHERE attend_id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setString(1,attendId);
+        preparedStatement.setString(1, attendId);
 
 
-        return preparedStatement.executeUpdate() >0 ? "SUCCESSFULLY DELETED" : "FAIL";
-
+        return preparedStatement.executeUpdate() > 0 ? "SUCCESSFULLY DELETED" : "FAIL";
 
 
     }
 
 
     public AttendanceDto searchAttendance(String attendId) throws SQLException, ClassNotFoundException {
-        Connection connection= DBConnection.getInstance().getConnection();
-        String sql="SELECT * FROM Attendance WHERE attend_id=?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM Attendance WHERE attend_id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setString(1,attendId);
+        preparedStatement.setString(1, attendId);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        if(resultSet.next()){
-            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"),resultSet.getString("status"),resultSet.getString("date"),resultSet.getString("attend_time"),resultSet.getString("empId"));
+        if (resultSet.next()) {
+            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"), resultSet.getString("status"), resultSet.getString("date"), resultSet.getString("attend_time"), resultSet.getString("empId"));
             return attendanceDto;
         }
 
         return null;
 
 
-
-
-
-
-
     }
 
     public ArrayList<AttendanceDto> getAllAttendance(String attendId) throws SQLException, ClassNotFoundException {
-        Connection connection= DBConnection.getInstance().getConnection();
-        String sql="SELECT * FROM Attendance ";
+        Connection connection = DBConnection.getInstance().getConnection();
+        String sql = "SELECT * FROM Attendance ";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ArrayList<AttendanceDto> attendanceDtos = new ArrayList<>();
 
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        if(resultSet.next()){
-            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"),resultSet.getString("status"),resultSet.getString("date"),resultSet.getString("attend_time"),resultSet.getString("empId"));
+        if (resultSet.next()) {
+            AttendanceDto attendanceDto = new AttendanceDto(resultSet.getString("attend_id"), resultSet.getString("status"), resultSet.getString("date"), resultSet.getString("attend_time"), resultSet.getString("empId"));
             attendanceDtos.add(attendanceDto);
             return attendanceDtos;
         }
@@ -107,18 +96,26 @@ public class AttendanceModel {
         return null;
 
 
-
-
-
-
-
     }
 
 
+    public String getNextCustomerId() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT attend_id from Attendance ORDER BY attend_id DESC LIMIT 1");
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            String lastId = resultSet.getString(1);
+            String lastIdNumberString = lastId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+
+            String nextIdString = String.format("A%03d", nextIdNumber);
+            return nextIdString;
+        }
+
+        return "A001";
 
 
-
-
-
-
+    }
 }

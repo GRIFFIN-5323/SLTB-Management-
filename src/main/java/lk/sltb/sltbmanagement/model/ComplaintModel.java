@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class ComplaintModel {
 
 
+
+
     public String addComplaint(ComplaintDto complaintDto) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getInstance().getConnection();
         String sql="INSERT INTO complaint VALUES(?,?,?,?,?,?)";
